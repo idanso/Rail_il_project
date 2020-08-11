@@ -44,6 +44,20 @@ public class Route {
 		setArrivalTime(LocalTime.of(hour, minutes));
 	}
 
+	public Route(String departurePlace, LocalTime departurelTime) {
+		Scanner s = new Scanner(System.in);
+		this.departurePlace = departurePlace;
+		this.departureTime = departurelTime;
+		System.out.println("Enter destination location:");
+		setArrivalPlace(s.nextLine());
+		System.out.println("Enter destenation hour:");
+		int hour = s.nextInt();
+		System.out.println("Enter destenation minutes:");
+		int minutes = s.nextInt();
+		s.nextLine();
+		setArrivalTime(LocalTime.of(hour, minutes));
+	}
+
 	public LocalTime getDepartureTime() {
 		return departureTime;
 	}
@@ -56,8 +70,24 @@ public class Route {
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(LocalTime arrivalTime) {
+	public void setArrivalTime(LocalTime arrivalTime) { // not working well need to edit
+		if(departureTime != null) {
+			do {
+				if(departureTime.isBefore(arrivalTime)) 
+					break;
+				System.out.println("departure time cannot be after arrival time... try again");
+				Scanner s = new Scanner(System.in);
+				System.out.println("Enter destenation hour:");
+				int hour = s.nextInt();
+				System.out.println("Enter destenation minutes:");
+				int minutes = s.nextInt();
+				s.nextLine();
+				arrivalTime = LocalTime.of(hour, minutes);
+			}
+				while(true);
+		}
 		this.arrivalTime = arrivalTime;
+		return;
 	}
 
 	public String getDeparturePlace() {
