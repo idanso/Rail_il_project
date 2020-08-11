@@ -70,7 +70,7 @@ public class Route {
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(LocalTime arrivalTime) { // not working well need to edit
+	public void setArrivalTime(LocalTime arrivalTime) {
 		if(departureTime != null) {
 			do {
 				if(departureTime.isBefore(arrivalTime)) 

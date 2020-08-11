@@ -50,7 +50,7 @@ public class Line {
 
 	@Override
 	public String toString() {
-		StringBuffer str = new StringBuffer(); //to edit...
+		StringBuffer str = new StringBuffer();
 		str.append(allStops.get(0).getDepartureTime() + " : " + allStops.get(0).getDeparturePlace().toString() + " --> ");
 		for (int i = 0; i <allStops.size(); i++) {
 			str.append(allStops.get(i).getArrivalTime() + " : " + allStops.get(i).getArrivalPlace().toString());	
