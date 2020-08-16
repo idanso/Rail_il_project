@@ -10,17 +10,18 @@ public class Main {
 		ArrayList<Route> allRoutes = new ArrayList<>();//check if still needed
 		ArrayList<Line> allLines = new ArrayList<>();
 		int choice;
-
+		System.out.println("Enter your choice: ");
+		for (int i = 1; i <= 4; i++) {
+			System.out.println("[" + i + "]" + "-" + MenuHelper(i - 1));
+		}
+		System.out.println("[" + 9 + "]-To exit");
+		
 		do {
 
-			System.out.println("Enter your choice: ");
-			for (int i = 1; i <= 9; i++) {
-				System.out.println("[" + i + "]" + "-" + MenuHelper(i - 1));
-			}
 			choice = s.nextInt();
 
 			switch (choice) {
-			case 1: {//check if still needed
+			case 1: {// check if still needed
 				allRoutes.add(new Route());
 				System.out.println("new route added succefully");
 
@@ -41,29 +42,23 @@ public class Main {
 
 				break;
 			}
-			case 5: {
+			/*
+			 * case 5: {
+			 * 
+			 * break; } case 6: {
+			 * 
+			 * break; } case 7: {
+			 * 
+			 * break; } case 8: {
+			 * 
+			 * break; }
+			 */
 
-				break;
 			}
-			case 6: {
+			} while (choice != 9);
+		System.out.println("Good bye:)");
+	}
 
-				break;
-			}
-			case 7: {
-
-				break;
-			}
-			case 8: {
-
-				break;
-			}
-			case 9: {
-				System.out.println("exiting system... Good bay:) ");
-			}
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + choice);
-			}
-		} while (choice != 9);
 		
 		s.close();
 	}

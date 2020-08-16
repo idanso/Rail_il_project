@@ -25,25 +25,37 @@ public class Route {
 	}
 
 	public Route() {
-		Scanner s = new Scanner(System.in);
-		System.out.println("Enter departure location:");
-		setDeparturePlace(s.nextLine());
-		System.out.println("Enter departure hour:");
-		int hour = s.nextInt();
-		System.out.println("Enter departure minutes:");
-		int minutes = s.nextInt();
-		s.nextLine();
-		setDepartureTime(LocalTime.of(hour, minutes));
-		System.out.println("Enter destination location:");
-		setArrivalPlace(s.nextLine());
-		System.out.println("Enter destenation hour:");
-		hour = s.nextInt();
-		System.out.println("Enter destenation minutes:");
-		minutes = s.nextInt();
-		s.nextLine();
-		setArrivalTime(LocalTime.of(hour, minutes));
-	}
+		boolean fcontinue = true;
+		do {
+			try {
+				Scanner s = new Scanner(System.in);
+				System.out.println("Enter departure location:");
+				setDeparturePlace(s.nextLine());
+				System.out.println("Enter departure hour:");
+				int hour = s.nextInt();
+				System.out.println("Enter departure minutes:");
+				int minutes = s.nextInt();
+				s.nextLine();
+				setDepartureTime(LocalTime.of(hour, minutes));
+				System.out.println("Enter destination location:");
+				setArrivalPlace(s.nextLine());
+				System.out.println("Enter destenation hour:");
+				hour = s.nextInt();
+				System.out.println("Enter destenation minutes:");
+				minutes = s.nextInt();
+				s.nextLine();
+				setArrivalTime(LocalTime.of(hour, minutes));
+				fcontinue = false;
+			} catch (InputMismatchException e) {
+				System.out.println("try again "+e.getMessage());
 
+			}
+			catch(IllegalArgumentException e) {
+				System.out.println("try again "+e.getMessage());
+			}
+		} while (fcontinue);
+
+	}
 	public Route(String departurePlace, LocalTime departurelTime) {
 		Scanner s = new Scanner(System.in);
 		this.departurePlace = departurePlace;
