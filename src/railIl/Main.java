@@ -57,11 +57,10 @@ public class Main {
 			}
 			} while (choice != 9);
 		System.out.println("Good bye:)");
+		s.close();
 	}
 
 		
-		s.close();
-	}
 
 	public static String MenuHelper(int i) {
 		final String str[] = new String[9];
