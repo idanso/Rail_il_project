@@ -1,5 +1,6 @@
 package railIl;
 
+import java.io.FileNotFoundException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -18,13 +19,11 @@ public class Main {
 			for (int i = 1; i <= 3; i++) {
 				System.out.println("[" + i + "]" + "-" + MenuHelper(i - 1));
 			}
-			System.out.println("[" + 9 + "]-To exit");
+			System.out.println("[" + 9 + "]-To exit and save to file");
 			choice = s.nextInt();
 
 			switch (choice) {
 			case 1: {
-				allRoutes.add(new Route());
-				System.out.println("new route added succefully");
 				ArrayList<Route> allStops = new ArrayList<Route>();
 				int stationCounter = 1;
 				boolean bExceptionFree = true;
@@ -72,20 +71,9 @@ public class Main {
 					} while (bError);
 				} while (bAnotherStation);
 				allLines.add(new Line(allStops));
-				if (hourDelay != 0 || hourDelay != 0) {
-					while ((allLines.get(allLines.size() - 1).getLastStop().getDepartureTime().getHour() + hourDelay)
-							+ (allLines.get(allLines.size() - 1).getLastStop().getArrivalTime().getHour()
-									- allLines.get(allLines.size() - 1).getLastStop().getDepartureTime().getHour()) < 23
-							&& (allLines.get(allLines.size() - 1).getLastStop().getDepartureTime().getMinute()
-									+ hourDelay)
-									+ (allLines.get(allLines.size() - 1).getLastStop().getArrivalTime().getMinute()
-											- allLines.get(allLines.size() - 1).getLastStop().getDepartureTime()
-													.getMinute()) < 59) {
-						allLines.add(
-								new Line(allLines.get(allLines.size() - 1).getAllStops(), hourDelay, minutesDelay));
-					}
+				if (hourDelay != 0 || minutesDelay != 0) {			
+					allLines = Support.DuplicateLineByFrequency(allLines,hourDelay,minutesDelay);				
 				}
-
 				System.out.println();
 				System.out.println("added new lines to the system from " + allStops.get(0).getDeparturePlace() + " to "
 						+ allStops.get(allStops.size() - 1).getArrivalPlace() + " with frequency: " + hourDelay + ":"
@@ -94,9 +82,8 @@ public class Main {
 				break;
 			}
 			case 2: {
-				BubblesortByTime(allRoutes);
-				PrintAllRoutesDetails(allRoutes);
-				PrintAllLinesDetails(allLines);
+				allLines = Support.bubblesortByTime(allLines);
+				System.out.println(Support.getAllLinesDetails(allLines));			
 				break;
 			}
 			case 3: {
@@ -106,9 +93,16 @@ public class Main {
 				} else
 					findRoutes(s, allLines);
 			}
-
+			case 4: {
+				try {
+					Support.writeToFile(allLines);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				System.out.println("file saves succefully");
 			}
-		} while (choice != 9);
+		} 
+		}while (choice != 9);	
 		System.out.println("Good bye:)");
 		s.close();
 	}
@@ -206,40 +200,7 @@ public class Main {
 		str[0] = "To Add new route and stop stations to system";
 		str[1] = "Show details of all lines";
 		str[2] = "To find details Routs ";
-
+		str[3] = "save to file";
 		return str[i];
-	}
-
-	public static void PrintAllRoutesDetails(ArrayList<Route> allRoutes) {
-		for (int i = 0; i < allRoutes.size(); i++) {
-			System.out.println(allRoutes.get(i).toString() + "\n");
-		}
-	}
-
-	public static void PrintAllLinesDetails(ArrayList<Line> allLines) {
-		for (int i = 0; i < allLines.size(); i++) {
-			System.out.println(allLines.get(i).toString() + "\n");
-		}
-	}
-
-	public static void BubblesortByTime(ArrayList<Route> allRoutes) {
-		int i, j;
-		Route temp;
-		boolean swapped;
-		for (i = 0; i < allRoutes.size() - 1; i++) {
-			swapped = false;
-			for (j = 0; j < allRoutes.size() - i - 1; j++) {
-				if (allRoutes.get(j).getDepartureTime().isAfter(allRoutes.get(j + 1).getDepartureTime())) {
-					temp = new Route(allRoutes.get(j));
-					allRoutes.set(j, allRoutes.get(j + 1));
-					allRoutes.set(j + 1, temp);
-					swapped = true;
-				}
-			}
-
-			if (swapped == false)
-				break;
-		}
-	}
-
+	}	
 }

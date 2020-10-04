@@ -18,6 +18,9 @@ public class Line {
 		}
 	}
 
+	public Line(Line line) {
+		this.allStops = line.allStops;
+	}
 	public Route getLastStop() {
 		return allStops.get(allStops.size() - 1);
 	}
