@@ -12,11 +12,16 @@ public class Main {
 		Scanner s = new Scanner(System.in);
 		ArrayList<Line> allLines = new ArrayList<>();
 		ArrayList<Route> allRoutes = new ArrayList<>();
+		try {
+			allLines = Support.readAllLines();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		int choice;
 
 		do {
 			System.out.println("Enter your choice: ");
-			for (int i = 1; i <= 3; i++) {
+			for (int i = 1; i <= 4; i++) {
 				System.out.println("[" + i + "]" + "-" + MenuHelper(i - 1));
 			}
 			System.out.println("[" + 9 + "]-To exit and save to file");
@@ -107,95 +112,7 @@ public class Main {
 		s.close();
 	}
 
-	private static void findRoutes(Scanner s, ArrayList<Line> allLines) {
-		String departureStation, destinationStation;
-		int hour, minuts, remember = 0, frequencyHour, frequencyMinuts;
-		boolean fcontinue = true;
-		do {
-
-			try {
-				System.out.println("Enter hour the frequency of line");
-				frequencyHour = s.nextInt();
-				System.out.println("Enter  minuts the frequency of line");
-				frequencyMinuts = s.nextInt();
-				System.out.println("Enter a departure station ");
-				departureStation = s.next();
-				System.out.println("Enter a destination station");
-				destinationStation = s.next();
-				System.out.println("Enter a departure hour");
-				hour = s.nextInt();
-				System.out.println("Enter a departure minuts");
-				minuts = s.nextInt();
-
-				for (int i = 0; i < allLines.size(); i++) {
-					for (int j = 0; j < allLines.get(i).getAllStops().size(); j++) {
-						if (allLines.get(i).getAllStops().get(i).getDeparturePlace().equals(departureStation)) {
-							if (allLines.get(i).getAllStops().equals(destinationStation)) {
-								if (allLines.get(i).getAllStops().get(i).getDepartureTime().getHour() >= hour
-										&& allLines.get(i).getAllStops().get(i).getDepartureTime()
-												.getMinute() >= minuts) {
-									System.out.println(allLines.get(i).getAllStops().get(i).getDepartureTime().getHour()
-											+ ":"
-											+ allLines.get(i).getAllStops().get(i).getDepartureTime().getMinute());
-									if ((allLines.get(i).getAllStops().get(i).getDepartureTime().getHour()
-											+ frequencyHour) <= 12) {
-
-										if (allLines.get(i).getAllStops().get(i).getDepartureTime().getHour()
-												+ frequencyMinuts < 60) {
-											System.out.println(
-													(allLines.get(i).getAllStops().get(i).getDepartureTime().getHour()
-															+ hour) + ":"
-															+ (allLines.get(i).getAllStops().get(i).getDepartureTime()
-																	.getMinute() + minuts));
-										} else if (allLines.get(i).getAllStops().get(i).getDepartureTime().getHour()
-												+ frequencyMinuts >= 60) {
-											System.out
-													.println(
-															(allLines.get(i).getAllStops().get(i).getDepartureTime()
-																	.getHour() + hour)
-																	+ ":"
-																	+ (allLines.get(i).getAllStops().get(i)
-																			.getDepartureTime().getMinute() + minuts
-																			- 60));
-										}
-
-									} else if ((allLines.get(i).getAllStops().get(i).getDepartureTime().getHour()
-											+ frequencyHour) > 12) {
-										if (allLines.get(i).getAllStops().get(i).getDepartureTime().getHour()
-												+ frequencyMinuts < 60) {
-											System.out.println(
-													(allLines.get(i).getAllStops().get(i).getDepartureTime().getHour()
-															+ hour - 12) + ":"
-															+ (allLines.get(i).getAllStops().get(i).getDepartureTime()
-																	.getMinute() + minuts));
-										} else if (allLines.get(i).getAllStops().get(i).getDepartureTime().getHour()
-												+ frequencyMinuts >= 60) {
-											System.out.println(
-													(allLines.get(i).getAllStops().get(i).getDepartureTime().getHour()
-															+ hour - 12) + ":"
-															+ (allLines.get(i).getAllStops().get(i).getDepartureTime()
-																	.getMinute() + minuts - 60));
-
-										}
-
-									}
-
-									System.out.println();
-
-								}
-							}
-						}
-					}
-				}
-			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage() + " try again");
-
-			}
-		} while (fcontinue);
-
-	}
-
-	public static String MenuHelper(int i) {
+		public static String MenuHelper(int i) {
 		final String str[] = new String[9];
 		str[0] = "To Add new route and stop stations to system";
 		str[1] = "Show details of all lines";
