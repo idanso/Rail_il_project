@@ -21,6 +21,7 @@ public abstract class Support {
 		String line;
 		while (myReader.hasNextLine()) {
 			routs.clear();
+			//line = myReader.nextLine();
 			while (!(line = myReader.nextLine()).equals("new line")) {
 				departurePlace = line;
 				departureHour = Integer.parseInt(myReader.nextLine());

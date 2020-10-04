@@ -7,7 +7,6 @@ INDEX VERSION 1.131+C:\programs for java studies\development tools - project\new
 3387041921.index
 3492159549.index
 1033523807.index
-1067094681.index
 526525587.index
 698026171.index
 2327948150.index

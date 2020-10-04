@@ -15,14 +15,18 @@ public abstract class Support {
 		ArrayList<Line> allLines = new ArrayList<>();
 		ArrayList<Route> routs = new ArrayList<Route>();
 		String departurePlace = null, arrivalPlace = null;
-		int departureHour = 0, departureMinutes = 0, arrivalHour = 0, arrivalMinutes;
+		int departureHour = 0, departureMinutes = 0, arrivalHour = 0, arrivalMinutes, counter = 0;
 		File myObj = new File("AllLines.txt");
 		Scanner myReader = new Scanner(myObj);
-		String line;
-		while (myReader.hasNextLine()) {
+		while(!myReader.hasNext("finish")) {
+			if(!myReader.hasNext("finish")){
+					System.out.println("yes");
+			}
+		}
+		while (!myReader.hasNext("finish")) {
 			routs.clear();
-			while (!(line = myReader.nextLine()).equals("new line")) {
-				departurePlace = line;
+			while (!myReader.hasNext("new line")) {
+				departurePlace = myReader.nextLine();
 				departureHour = Integer.parseInt(myReader.nextLine());
 				departureMinutes = Integer.parseInt(myReader.nextLine());
 				arrivalPlace = myReader.nextLine();
@@ -31,7 +35,7 @@ public abstract class Support {
 				routs.add(new Route(LocalTime.of(departureHour, departureMinutes),
 						LocalTime.of(arrivalHour, arrivalMinutes), departurePlace, arrivalPlace));
 			}
-			allLines.add(new Line(new ArrayList<Route>(routs)));
+			allLines.add(new Line(routs));
 		}
 		myReader.close();
 		return allLines;

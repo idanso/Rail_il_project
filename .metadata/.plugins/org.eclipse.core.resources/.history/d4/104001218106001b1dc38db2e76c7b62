@@ -19,8 +19,9 @@ public abstract class Support {
 		File myObj = new File("AllLines.txt");
 		Scanner myReader = new Scanner(myObj);
 		String line;
-		while (myReader.hasNextLine()) {
+		while (myReader.hasNext()) {
 			routs.clear();
+			//line = myReader.nextLine();
 			while (!(line = myReader.nextLine()).equals("new line")) {
 				departurePlace = line;
 				departureHour = Integer.parseInt(myReader.nextLine());
