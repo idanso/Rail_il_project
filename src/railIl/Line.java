@@ -27,6 +27,23 @@ public class Line {
 	public ArrayList<Route> getAllStops(){
 		return allStops;
 	}
+	
+
+	public Route findRoute(String departurePlace, String arrivalPlace, LocalTime departureTime) {
+		// find routs
+		Route findRoute;
+		for (int i = 0; i < allStops.size(); i++) {
+			if (departurePlace.equals(allStops.get(i).getDeparturePlace())
+					&& (arrivalPlace.equals(allStops.get(i).getArrivalPlace())
+							&& departureTime.isBefore(allStops.get(i).getDepartureTime()))) {
+				findRoute = allStops.get(i);
+				return findRoute;
+			}
+
+		}
+		return null;
+
+	}
 
 	@Override
 	public String toString() {

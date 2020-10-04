@@ -91,7 +91,7 @@ public class Main {
 					System.out.println("No routes in the system");
 					break;
 				} else
-					findRoutes(s, allLines);
+					Support.findRoutes(s, allLines);
 			}
 			case 4: {
 				try {
