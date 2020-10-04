@@ -1,0 +1,43 @@
+package railIl;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public abstract class Support {
+
+	public static ArrayList<Line> DuplicateLineByFrequency (ArrayList<Line> allLines, int hourDelay, int minutesDelay) {
+		while ((allLines.get(allLines.size() - 1).getLastStop().getDepartureTime().getHour() + hourDelay)
+				+ (allLines.get(allLines.size() - 1).getLastStop().getArrivalTime().getHour()
+						- allLines.get(allLines.size() - 1).getLastStop().getDepartureTime().getHour()) < 23
+				&& (allLines.get(allLines.size() - 1).getLastStop().getDepartureTime().getMinute()
+						+ hourDelay)
+						+ (allLines.get(allLines.size() - 1).getLastStop().getArrivalTime().getMinute()
+								- allLines.get(allLines.size() - 1).getLastStop().getDepartureTime()
+										.getMinute()) < 59) {
+			allLines.add(
+					new Line(allLines.get(allLines.size() - 1).getAllStops(), hourDelay, minutesDelay));
+		}
+		return allLines;
+	}
+	
+	public static ArrayList<Route> BubblesortByTime(ArrayList<Route> allRoutes) {
+		int i, j;
+		Route temp;
+		boolean swapped;
+		for (i = 0; i < allRoutes.size() - 1; i++) {
+			swapped = false;
+			for (j = 0; j < allRoutes.size() - i - 1; j++) {
+				if (allRoutes.get(j).getDepartureTime().isAfter(allRoutes.get(j + 1).getDepartureTime())) {
+					temp = new Route(allRoutes.get(j));
+					allRoutes.set(j, allRoutes.get(j + 1));
+					allRoutes.set(j + 1, temp);
+					swapped = true;
+				}
+			}
+
+			if (swapped == false)
+				break;
+		}
+	}
+
+}

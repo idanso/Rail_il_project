@@ -1,0 +1,35 @@
+package testing;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.time.LocalTime;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import railIl.Line;
+import railIl.Route;
+
+class testings {
+
+	@Test
+	void test() {
+		ArrayList<Route> tAllStops = new ArrayList<Route>();
+		ArrayList<Line> tAllLines = new ArrayList<>();
+		tAllStops.add(new Route(LocalTime.of(8,0),LocalTime.of(9,0), "haifa", "atlit"));
+		tAllStops.add(new Route(LocalTime.of(9,0),LocalTime.of(9,30), "atlit", "hadera"));
+		tAllStops.add(new Route(LocalTime.of(9,30),LocalTime.of(10,20), "hadera", "natanya"));
+		tAllStops.add(new Route(LocalTime.of(10,20),LocalTime.of(11,0), "natanya", "herzelia"));
+		tAllStops.add(new Route(LocalTime.of(11,0),LocalTime.of(11,15), "herzelia", "tel aviv"));
+		tAllStops.add(new Route(LocalTime.of(11,15),LocalTime.of(11,40), "tel aviv", "ashdod"));
+		tAllLines.add(new Line(tAllStops));
+		tAllLines.add(new Line(tAllStops,1,30));
+		for (int i = 0; i <; i++) {
+			
+		}
+		tAllLines.add(new Line(tAllLines.get(0).getAllStops(),1,30));
+		tAllLines.add(new Line(tAllLines.get(0).getAllStops(),1,30));
+		//fail("Not yet implemented");
+	}
+
+}

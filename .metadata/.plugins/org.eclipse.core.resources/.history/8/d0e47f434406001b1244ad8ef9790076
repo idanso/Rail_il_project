@@ -1,0 +1,21 @@
+package railIl;
+
+import java.util.ArrayList;
+
+public class support {
+
+	public static ArrayList<Line> DuplicateLineByFrequency (ArrayList<Line> allLines, int hourDelay, int minutesDelay) {
+		while ((allLines.get(allLines.size() - 1).getLastStop().getDepartureTime().getHour() + hourDelay)
+				+ (allLines.get(allLines.size() - 1).getLastStop().getArrivalTime().getHour()
+						- allLines.get(allLines.size() - 1).getLastStop().getDepartureTime().getHour()) < 23
+				&& (allLines.get(allLines.size() - 1).getLastStop().getDepartureTime().getMinute()
+						+ hourDelay)
+						+ (allLines.get(allLines.size() - 1).getLastStop().getArrivalTime().getMinute()
+								- allLines.get(allLines.size() - 1).getLastStop().getDepartureTime()
+										.getMinute()) < 59) {
+			allLines.add(
+					new Line(allLines.get(allLines.size() - 1).getAllStops(), hourDelay, minutesDelay));
+		}
+		return allLines;
+	}
+}
