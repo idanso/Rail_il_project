@@ -21,17 +21,8 @@ public abstract class Support {
 		String line;
 		while (myReader.hasNextLine()) {
 			routs.clear();
-<<<<<<< HEAD
-			while (!myReader.hasNext("new line")) {
-
-				departurePlace = myReader.nextLine();
-				if (departurePlace.equals("new line")) {
-					break;
-				}
-=======
 			while (!(line = myReader.nextLine()).equals("new line")) {
 				departurePlace = line;
->>>>>>> ac2438e09327ca6b633847c5e1a43e12d96d854a
 				departureHour = Integer.parseInt(myReader.nextLine());
 				departureMinutes = Integer.parseInt(myReader.nextLine());
 				arrivalPlace = myReader.nextLine();
@@ -39,67 +30,12 @@ public abstract class Support {
 				arrivalMinutes = Integer.parseInt(myReader.nextLine());
 				routs.add(new Route(LocalTime.of(departureHour, departureMinutes),
 						LocalTime.of(arrivalHour, arrivalMinutes), departurePlace, arrivalPlace));
-
-				allLines.add(new Line(routs));
 			}
-<<<<<<< HEAD
-
-=======
 			allLines.add(new Line(new ArrayList<Route>(routs)));
->>>>>>> ac2438e09327ca6b633847c5e1a43e12d96d854a
 		}
 		myReader.close();
 		return allLines;
 	}
-
-	/*
-	 * public static void findRoutes(Scanner s, ArrayList<Line> allLines) { String
-	 * departureStation, destinationStation; int hour, minutes; int counter1 = 0;
-	 * boolean fcontinu = true; ArrayList<Route> routes = new ArrayList<Route>();
-	 * 
-	 * try {
-	 * 
-	 * System.out.println("Enter a departure station "); departureStation =
-	 * s.nextLine(); System.out.println("Enter a destination station");
-	 * destinationStation = s.nextLine();
-	 * System.out.println("Enter a departure hour"); hour = s.nextInt();
-	 * System.out.println("Enter a departure minuts"); minutes = s.nextInt();
-	 * s.nextLine(); for (int i = 0; i < allLines.size(); i++) { if
-	 * (allLines.get(i).findRoute(departureStation, destinationStation,
-	 * LocalTime.of(hour, minutes)) != null) {
-	 * routes.add(allLines.get(i).findRoute(departureStation, destinationStation,
-	 * LocalTime.of(hour, minutes))); counter1++;
-	 * 
-	 * }
-	 * 
-	 * 
-	 * if (counter1 == 3) { fcontinu = false; }
-	 * 
-	 * } }
-	 * 
-	 * catch (InputMismatchException e) { System.out.println(e.getMessage() +
-	 * " try again"); fcontinu = true; s.nextLine();
-	 * 
-	 * } catch (IllegalArgumentException e) { System.out.println(e.getMessage() +
-	 * " try again"); }
-	 * 
-	 * // Sort the Route int i, j, counter = 0; Route temp; boolean swapped; for (i
-	 * = 0; i < routes.size() - 1; i++) { swapped = false; for (j = 0; j <
-	 * routes.size() - i - 1; j++) { if
-	 * (routes.get(j).getDepartureTime().isAfter(routes.get(j +
-	 * 1).getDepartureTime())) { temp = new Route(routes.get(j)); routes.set(j,
-	 * routes.get(j + 1)); routes.set(j + 1, temp); counter++; swapped = true;
-	 * 
-	 * }
-	 * 
-	 * }
-	 * 
-	 * if (swapped == false) break; }
-	 * 
-	 * System.out.println(routes);
-	 * 
-	 * }
-	 */
 
 	public static ArrayList<Line> DuplicateLineByFrequency(ArrayList<Line> allLines, int hourDelay, int minutesDelay) {
 		while ((allLines.get(allLines.size() - 1).getLastStop().getDepartureTime().getHour() + hourDelay)

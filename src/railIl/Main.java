@@ -128,9 +128,9 @@ public class Main {
 
 		public static String MenuHelper(int i) {
 		final String str[] = new String[9];
-		str[0] = "To Add new route and stop stations to system";
+		str[0] = "add new line to the system";
 		str[1] = "Show details of all lines";
-		str[2] = "To find details Routs ";
+		str[2] = "To search route ";
 		str[3] = "save to file";
 		return str[i];
 	}	
