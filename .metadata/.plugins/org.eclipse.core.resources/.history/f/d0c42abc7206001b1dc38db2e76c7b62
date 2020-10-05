@@ -15,23 +15,13 @@ public abstract class Support {
 		ArrayList<Line> allLines = new ArrayList<>();
 		ArrayList<Route> routs = new ArrayList<Route>();
 		String departurePlace = null, arrivalPlace = null;
-		int departureHour = 0, departureMinutes = 0, arrivalHour = 0, arrivalMinutes;
+		int departureHour = 0, departureMinutes = 0, arrivalHour = 0, arrivalMinutes, counter = 0;
 		File myObj = new File("AllLines.txt");
 		Scanner myReader = new Scanner(myObj);
-		String line;
-		while (myReader.hasNextLine()) {
+		while (!myReader.hasNext("finish")) {
 			routs.clear();
-<<<<<<< HEAD
 			while (!myReader.hasNext("new line")) {
-
 				departurePlace = myReader.nextLine();
-				if (departurePlace.equals("new line")) {
-					break;
-				}
-=======
-			while (!(line = myReader.nextLine()).equals("new line")) {
-				departurePlace = line;
->>>>>>> ac2438e09327ca6b633847c5e1a43e12d96d854a
 				departureHour = Integer.parseInt(myReader.nextLine());
 				departureMinutes = Integer.parseInt(myReader.nextLine());
 				arrivalPlace = myReader.nextLine();
@@ -39,67 +29,80 @@ public abstract class Support {
 				arrivalMinutes = Integer.parseInt(myReader.nextLine());
 				routs.add(new Route(LocalTime.of(departureHour, departureMinutes),
 						LocalTime.of(arrivalHour, arrivalMinutes), departurePlace, arrivalPlace));
-
-				allLines.add(new Line(routs));
 			}
-<<<<<<< HEAD
-
-=======
-			allLines.add(new Line(new ArrayList<Route>(routs)));
->>>>>>> ac2438e09327ca6b633847c5e1a43e12d96d854a
+			allLines.add(new Line(routs));
 		}
 		myReader.close();
 		return allLines;
 	}
 
-	/*
-	 * public static void findRoutes(Scanner s, ArrayList<Line> allLines) { String
-	 * departureStation, destinationStation; int hour, minutes; int counter1 = 0;
-	 * boolean fcontinu = true; ArrayList<Route> routes = new ArrayList<Route>();
-	 * 
-	 * try {
-	 * 
-	 * System.out.println("Enter a departure station "); departureStation =
-	 * s.nextLine(); System.out.println("Enter a destination station");
-	 * destinationStation = s.nextLine();
-	 * System.out.println("Enter a departure hour"); hour = s.nextInt();
-	 * System.out.println("Enter a departure minuts"); minutes = s.nextInt();
-	 * s.nextLine(); for (int i = 0; i < allLines.size(); i++) { if
-	 * (allLines.get(i).findRoute(departureStation, destinationStation,
-	 * LocalTime.of(hour, minutes)) != null) {
-	 * routes.add(allLines.get(i).findRoute(departureStation, destinationStation,
-	 * LocalTime.of(hour, minutes))); counter1++;
-	 * 
-	 * }
-	 * 
-	 * 
-	 * if (counter1 == 3) { fcontinu = false; }
-	 * 
-	 * } }
-	 * 
-	 * catch (InputMismatchException e) { System.out.println(e.getMessage() +
-	 * " try again"); fcontinu = true; s.nextLine();
-	 * 
-	 * } catch (IllegalArgumentException e) { System.out.println(e.getMessage() +
-	 * " try again"); }
-	 * 
-	 * // Sort the Route int i, j, counter = 0; Route temp; boolean swapped; for (i
-	 * = 0; i < routes.size() - 1; i++) { swapped = false; for (j = 0; j <
-	 * routes.size() - i - 1; j++) { if
-	 * (routes.get(j).getDepartureTime().isAfter(routes.get(j +
-	 * 1).getDepartureTime())) { temp = new Route(routes.get(j)); routes.set(j,
-	 * routes.get(j + 1)); routes.set(j + 1, temp); counter++; swapped = true;
-	 * 
-	 * }
-	 * 
-	 * }
-	 * 
-	 * if (swapped == false) break; }
-	 * 
-	 * System.out.println(routes);
-	 * 
-	 * }
-	 */
+	public static void findRoutes(Scanner s, ArrayList<Line> allLines) {
+		String departureStation, destinationStation;
+		int hour, minutes;
+		int counter1 = 0;
+		boolean fcontinu = true;
+		ArrayList<Route> routes = new ArrayList<Route>();
+
+		try {
+
+			System.out.println("Enter a departure station ");
+			departureStation = s.nextLine();
+			System.out.println("Enter a destination station");
+			destinationStation = s.nextLine();
+			System.out.println("Enter a departure hour");
+			hour = s.nextInt();
+			System.out.println("Enter a departure minuts");
+			minutes = s.nextInt();
+			s.nextLine();
+			for (int i = 0; i < allLines.size(); i++) {
+				if (allLines.get(i).findRoute(departureStation, destinationStation,
+						LocalTime.of(hour, minutes)) != null) {
+					routes.add(allLines.get(i).findRoute(departureStation, destinationStation,
+							LocalTime.of(hour, minutes)));
+					counter1++;
+
+				}
+
+				/*
+				 * if (counter1 == 3) { fcontinu = false; }
+				 */
+			}
+		}
+
+		catch (InputMismatchException e) {
+			System.out.println(e.getMessage() + " try again");
+			fcontinu = true;
+			s.nextLine();
+
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage() + " try again");
+		}
+
+		// Sort the Route
+		int i, j, counter = 0;
+		Route temp;
+		boolean swapped;
+		for (i = 0; i < routes.size() - 1; i++) {
+			swapped = false;
+			for (j = 0; j < routes.size() - i - 1; j++) {
+				if (routes.get(j).getDepartureTime().isAfter(routes.get(j + 1).getDepartureTime())) {
+					temp = new Route(routes.get(j));
+					routes.set(j, routes.get(j + 1));
+					routes.set(j + 1, temp);
+					counter++;
+					swapped = true;
+
+				}
+
+			}
+
+			if (swapped == false)
+				break;
+		}
+
+		System.out.println(routes);
+
+	}
 
 	public static ArrayList<Line> DuplicateLineByFrequency(ArrayList<Line> allLines, int hourDelay, int minutesDelay) {
 		while ((allLines.get(allLines.size() - 1).getLastStop().getDepartureTime().getHour() + hourDelay)
@@ -147,7 +150,6 @@ public abstract class Support {
 		File fr = new File("AllLines.txt");
 		PrintWriter outputStream = new PrintWriter(fr);
 		for (Line i : allLines) {
-			System.out.println("\n");
 			for (Route j : i.getAllStops()) {
 				outputStream.append(j.getDeparturePlace() + "\n");
 				outputStream.append(j.getDepartureTime().getHour() + "\n");
@@ -156,35 +158,10 @@ public abstract class Support {
 				outputStream.append(j.getArrivalTime().getHour() + "\n");
 				outputStream.append(j.getArrivalTime().getMinute() + "\n");
 			}
-			outputStream.append("new line");
+			outputStream.append("new line\n");
 		}
+		outputStream.append("finish");
 		outputStream.close();
 	}
 
-	public static ArrayList<Line> findFastestRoute(ArrayList<Line> allLines, LocalTime departureTime, String departurePlace, String arrivalPlace) {
-		ArrayList<Line> wantedLines = new ArrayList<>();
-		int counter = 0,counter2 = 0;
-		while (counter < allLines.size() && wantedLines.size() < 3) {
-			Line lineCheck = allLines.get(counter);
-			wantedLines.add(new Line(lineCheck.findSubLine(departurePlace, arrivalPlace, departureTime)));
-			if (wantedLines.get(counter2).getAllStops() == null) {
-				wantedLines.remove(wantedLines.size() - 1);
-				counter2--;
-			}
-			counter++;
-			counter2++;
-		}
-		return wantedLines;
-	}
-
-	public static String routeSearch(ArrayList<Line> allLines, LocalTime departureTime,
-			String departurePlace, String arrivalPlace) {
-		ArrayList<Line> wantedLines = new ArrayList<>(
-				findFastestRoute(allLines, departureTime, departurePlace, arrivalPlace));
-		StringBuffer str = new StringBuffer();
-		for (int i = 0; i < wantedLines.size(); i++) {
-			str.append((i + 1) + ") " + wantedLines.get(i).toString() + "\n");
-		}
-		return str.toString();
-	}
 }

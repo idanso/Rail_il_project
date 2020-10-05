@@ -11,7 +11,6 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		ArrayList<Line> allLines = new ArrayList<>();
-		ArrayList<Route> allRoutes = new ArrayList<>();
 		try {
 			allLines = Support.readAllLines();
 		} catch (FileNotFoundException e1) {
@@ -26,6 +25,7 @@ public class Main {
 			}
 			System.out.println("[" + 9 + "]-To exit and save to file");
 			choice = s.nextInt();
+			s.nextLine();
 
 			switch (choice) {
 			case 1: {
@@ -44,6 +44,7 @@ public class Main {
 						bExceptionFree = false;
 					} catch (InputMismatchException e) {
 						System.out.println("entered invalid input, try again...");
+						s.nextLine();
 					}
 				} while (bExceptionFree);
 				System.out.println(
@@ -92,11 +93,24 @@ public class Main {
 				break;
 			}
 			case 3: {
-				if (allRoutes.isEmpty()) {
-					System.out.println("No routes in the system");
-					break;
+				if (!allLines.isEmpty()) {
+					String departureStation, arrivalPlace;
+					int hour, minutes;
+					System.out.println("Enter a departure station ");
+					departureStation = s.nextLine();
+					System.out.println("Enter a destination station");
+					arrivalPlace = s.nextLine();
+					System.out.println("Enter a departure hour");
+					hour = s.nextInt();
+					System.out.println("Enter a departure minuts");
+					minutes = s.nextInt();
+					s.nextLine();
+					LocalTime departureTime = LocalTime.of(hour, minutes);		
+					System.out.println(Support.routeSearch(allLines, departureTime, departureStation, arrivalPlace));
 				} else
-					Support.findRoutes(s, allLines);
+					System.out.println("No routes in the system");
+					
+				
 			}
 			case 4: {
 				try {
