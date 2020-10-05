@@ -97,9 +97,10 @@ public abstract class Support {
 		outputStream.close();
 	}
 
-	public static ArrayList<Line> findFastestRoute(ArrayList<Line> allLines, LocalTime departureTime, String departurePlace, String arrivalPlace) {
+	public static ArrayList<Line> findFastestRoute(ArrayList<Line> allLines, LocalTime departureTime,
+			String departurePlace, String arrivalPlace) {
 		ArrayList<Line> wantedLines = new ArrayList<>();
-		int counter = 0,counter2 = 0;
+		int counter = 0, counter2 = 0;
 		while (counter < allLines.size() && wantedLines.size() < 3) {
 			Line lineCheck = allLines.get(counter);
 			wantedLines.add(new Line(lineCheck.findSubLine(departurePlace, arrivalPlace, departureTime)));
@@ -113,8 +114,8 @@ public abstract class Support {
 		return wantedLines;
 	}
 
-	public static String routeSearch(ArrayList<Line> allLines, LocalTime departureTime,
-			String departurePlace, String arrivalPlace) {
+	public static String routeSearch(ArrayList<Line> allLines, LocalTime departureTime, String departurePlace,
+			String arrivalPlace) {
 		ArrayList<Line> wantedLines = new ArrayList<>(
 				findFastestRoute(allLines, departureTime, departurePlace, arrivalPlace));
 		StringBuffer str = new StringBuffer();

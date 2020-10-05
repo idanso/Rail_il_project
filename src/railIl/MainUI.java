@@ -5,7 +5,7 @@ public class MainUI {
 		String source = "tal-aviv", destination = "beer-sheva";
 		Integer hour = new Integer(12);
 		Integer minuts = new Integer(00);
-		boolean isHTML = args.length > 0 && args[0].equalsIgnoreCase("html");
+		boolean isHTML = args.length > 0 && !(args[0].equalsIgnoreCase("html"));
 
 		if (isHTML) {
 			System.out.println("<br>");
