@@ -21,7 +21,11 @@ public abstract class Support {
 		while (!myReader.hasNext("finish")) {
 			routs.clear();
 			while (!myReader.hasNext("new line")) {
+
 				departurePlace = myReader.nextLine();
+				if (departurePlace.equals("new line")) {
+					break;
+				}
 				departureHour = Integer.parseInt(myReader.nextLine());
 				departureMinutes = Integer.parseInt(myReader.nextLine());
 				arrivalPlace = myReader.nextLine();
@@ -29,8 +33,10 @@ public abstract class Support {
 				arrivalMinutes = Integer.parseInt(myReader.nextLine());
 				routs.add(new Route(LocalTime.of(departureHour, departureMinutes),
 						LocalTime.of(arrivalHour, arrivalMinutes), departurePlace, arrivalPlace));
+
+				allLines.add(new Line(routs));
 			}
-			allLines.add(new Line(routs));
+
 		}
 		myReader.close();
 		return allLines;
