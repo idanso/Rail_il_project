@@ -11,7 +11,6 @@ import java.util.Scanner;
 public abstract class Support {
 
 	public static ArrayList<Line> readAllLines() throws FileNotFoundException {
-
 		ArrayList<Line> allLines = new ArrayList<>();
 		ArrayList<Route> routs = new ArrayList<Route>();
 		String departurePlace = null, arrivalPlace = null;
@@ -21,34 +20,30 @@ public abstract class Support {
 		String line;
 		while (myReader.hasNextLine()) {
 			routs.clear();
-<<<<<<< HEAD
 			while (!myReader.hasNext("new line")) {
 
 				departurePlace = myReader.nextLine();
 				if (departurePlace.equals("new line")) {
 					break;
 				}
-=======
-			while (!(line = myReader.nextLine()).equals("new line")) {
-				departurePlace = line;
->>>>>>> ac2438e09327ca6b633847c5e1a43e12d96d854a
-				departureHour = Integer.parseInt(myReader.nextLine());
-				departureMinutes = Integer.parseInt(myReader.nextLine());
-				arrivalPlace = myReader.nextLine();
-				arrivalHour = Integer.parseInt(myReader.nextLine());
-				arrivalMinutes = Integer.parseInt(myReader.nextLine());
-				routs.add(new Route(LocalTime.of(departureHour, departureMinutes),
-						LocalTime.of(arrivalHour, arrivalMinutes), departurePlace, arrivalPlace));
+				while (!(line = myReader.nextLine()).equals("new line")) {
+					departurePlace = line;
+					departureHour = Integer.parseInt(myReader.nextLine());
+					departureMinutes = Integer.parseInt(myReader.nextLine());
+					arrivalPlace = myReader.nextLine();
+					arrivalHour = Integer.parseInt(myReader.nextLine());
+					arrivalMinutes = Integer.parseInt(myReader.nextLine());
+					routs.add(new Route(LocalTime.of(departureHour, departureMinutes),
+							LocalTime.of(arrivalHour, arrivalMinutes), departurePlace, arrivalPlace));
 
-				allLines.add(new Line(routs));
+					allLines.add(new Line(routs));
+				}
+
+				allLines.add(new Line(new ArrayList<Route>(routs)));
 			}
-<<<<<<< HEAD
+			myReader.close();
 
-=======
-			allLines.add(new Line(new ArrayList<Route>(routs)));
->>>>>>> ac2438e09327ca6b633847c5e1a43e12d96d854a
 		}
-		myReader.close();
 		return allLines;
 	}
 
@@ -161,9 +156,10 @@ public abstract class Support {
 		outputStream.close();
 	}
 
-	public static ArrayList<Line> findFastestRoute(ArrayList<Line> allLines, LocalTime departureTime, String departurePlace, String arrivalPlace) {
+	public static ArrayList<Line> findFastestRoute(ArrayList<Line> allLines, LocalTime departureTime,
+			String departurePlace, String arrivalPlace) {
 		ArrayList<Line> wantedLines = new ArrayList<>();
-		int counter = 0,counter2 = 0;
+		int counter = 0, counter2 = 0;
 		while (counter < allLines.size() && wantedLines.size() < 3) {
 			Line lineCheck = allLines.get(counter);
 			wantedLines.add(new Line(lineCheck.findSubLine(departurePlace, arrivalPlace, departureTime)));
@@ -177,8 +173,8 @@ public abstract class Support {
 		return wantedLines;
 	}
 
-	public static String routeSearch(ArrayList<Line> allLines, LocalTime departureTime,
-			String departurePlace, String arrivalPlace) {
+	public static String routeSearch(ArrayList<Line> allLines, LocalTime departureTime, String departurePlace,
+			String arrivalPlace) {
 		ArrayList<Line> wantedLines = new ArrayList<>(
 				findFastestRoute(allLines, departureTime, departurePlace, arrivalPlace));
 		StringBuffer str = new StringBuffer();
