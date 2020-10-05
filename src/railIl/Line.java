@@ -29,21 +29,42 @@ public class Line {
 	}
 	
 
-	public Route findRoute(String departurePlace, String arrivalPlace, LocalTime departureTime) {
-		// find routs
-		Route findRoute;
+	public boolean findRoute(String departurePlace, String arrivalPlace, LocalTime departureTime) {
+		//Route findRoute;
 		for (int i = 0; i < allStops.size(); i++) {
 			if (departurePlace.equals(allStops.get(i).getDeparturePlace())
 					&& (arrivalPlace.equals(allStops.get(i).getArrivalPlace())
 							&& departureTime.isBefore(allStops.get(i).getDepartureTime()))) {
-				findRoute = allStops.get(i);
-				return findRoute;
+				return true;
 			}
 
 		}
-		return null;
+		return false;
 
 	}
+	
+	public ArrayList<Route> findSubLine (String departurePlace, String arrivalPlace, LocalTime departureTime){
+		ArrayList<Route> subLine = new ArrayList<>();
+		boolean placeNotFound = true;
+		for(int i = 0; i < allStops.size(); i++) {
+			Route checkRoute = new Route(allStops.get(i));
+			if(placeNotFound) {
+				if(checkRoute.getDeparturePlace().equals(departurePlace) && checkRoute.getDepartureTime().isAfter(departureTime)) {
+				placeNotFound = false;
+				}
+			}
+			if(!placeNotFound) {
+				subLine.add(checkRoute);
+				if(checkRoute.getArrivalPlace().equals(arrivalPlace)) {
+					return subLine;
+				}
+			}
+			
+		}
+		return null;
+	}
+		
+		
 
 	@Override
 	public String toString() {
