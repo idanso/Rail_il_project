@@ -93,6 +93,7 @@ public class Main {
 				break;
 			}
 			case 3: {
+				String strWantedLines = null;
 				if (!allLines.isEmpty()) {
 					String departureStation, arrivalPlace;
 					int hour, minutes;
@@ -106,11 +107,15 @@ public class Main {
 					minutes = s.nextInt();
 					s.nextLine();
 					LocalTime departureTime = LocalTime.of(hour, minutes);		
-					System.out.println(Support.routeSearch(allLines, departureTime, departureStation, arrivalPlace));
+					strWantedLines =  Support.routeSearch(allLines, departureTime, departureStation, arrivalPlace, false);
 				} else
 					System.out.println("No routes in the system");
-					
-				
+				if (strWantedLines != null){
+					System.out.println(strWantedLines);
+				}
+				else
+					System.out.println("couldn't find routs, try enter another parameters...");
+				break;
 			}
 			case 4: {
 				try {

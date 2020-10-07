@@ -16,7 +16,7 @@ public abstract class Support {
 		ArrayList<Route> routs = new ArrayList<Route>();
 		String departurePlace = null, arrivalPlace = null;
 		int departureHour = 0, departureMinutes = 0, arrivalHour = 0, arrivalMinutes;
-		File myObj = new File("AllLines.txt");
+		File myObj = new File("C:/programs for java studies/development_tools-project/new/Rail_il_project/AllLines.txt");
 		Scanner myReader = new Scanner(myObj);
 		String line;
 		while (myReader.hasNextLine()) {
@@ -82,17 +82,19 @@ public abstract class Support {
 	public static void writeToFile(ArrayList<Line> allLines) throws FileNotFoundException {
 		File fr = new File("AllLines.txt");
 		PrintWriter outputStream = new PrintWriter(fr);
-		for (Line i : allLines) {
-			System.out.println("\n");
-			for (Route j : i.getAllStops()) {
-				outputStream.append(j.getDeparturePlace() + "\n");
-				outputStream.append(j.getDepartureTime().getHour() + "\n");
-				outputStream.append(j.getDepartureTime().getMinute() + "\n");
-				outputStream.append(j.getArrivalPlace() + "\n");
-				outputStream.append(j.getArrivalTime().getHour() + "\n");
-				outputStream.append(j.getArrivalTime().getMinute() + "\n");
+		for (int i = 0; i < allLines.size(); i++ ) {
+			for (int j = 0; j < allLines.get(i).getAllStops().size(); j++) {
+				outputStream.append(allLines.get(i).getAllStops().get(j).getDeparturePlace() + "\n");
+				outputStream.append(allLines.get(i).getAllStops().get(j).getDepartureTime().getHour() + "\n");
+				outputStream.append(allLines.get(i).getAllStops().get(j).getDepartureTime().getMinute() + "\n");
+				outputStream.append(allLines.get(i).getAllStops().get(j).getArrivalPlace() + "\n");
+				outputStream.append(allLines.get(i).getAllStops().get(j).getArrivalTime().getHour() + "\n");
+				outputStream.append(allLines.get(i).getAllStops().get(j).getArrivalTime().getMinute() + "\n");
 			}
-			outputStream.append("new line");
+			if(i == (allLines.size() - 1)) 
+				outputStream.append("new line\n");
+			else
+			outputStream.append("new line\n");
 		}
 		outputStream.close();
 	}
@@ -111,17 +113,34 @@ public abstract class Support {
 			counter++;
 			counter2++;
 		}
-		return wantedLines;
+			return wantedLines;
 	}
 
 	public static String routeSearch(ArrayList<Line> allLines, LocalTime departureTime, String departurePlace,
-			String arrivalPlace) {
+			String arrivalPlace,boolean isHtml) {
 		ArrayList<Line> wantedLines = new ArrayList<>(
 				findFastestRoute(allLines, departureTime, departurePlace, arrivalPlace));
+		if(!wantedLines.isEmpty()) {
 		StringBuffer str = new StringBuffer();
+		if(isHtml)
+			str.append("<style>\n" + 
+					"table, td {\n" + 
+					"  border: 1.5px solid black;\n" + 
+					"  border-collapse: collapse;\n" +
+					"}\n" + 
+					"</style> <table>\n"
+					+ "<tbody>\n");
 		for (int i = 0; i < wantedLines.size(); i++) {
-			str.append((i + 1) + ") " + wantedLines.get(i).toString() + "\n");
-		}
+			if(isHtml)
+				str.append("<tr>\n<td>\n" + (i + 1) + ") \n</td>\n<td>\n" + wantedLines.get(i).toString() + "\n</td>\n</tr>\n");
+			else
+				str.append((i + 1) + ") " + wantedLines.get(i).toString() +"\n");
+		}	
+		if(isHtml)
+			str.append("</table>\n</tbody>");
 		return str.toString();
+		}
+		else
+			return null;
 	}
 }
