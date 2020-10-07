@@ -13,18 +13,21 @@ public class MainUI {
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		
-		String source = "tal-aviv", destination = "Beer-sheva";
+		String source = "tel-aviv", destination = "Beer-sheva";
 		int hour = 12;
 		int minuts = 00;
 		boolean isHtml = args.length > 0 && args[0].equalsIgnoreCase("html");
-		boolean isSource = args.length > 0 && !(args[1].equalsIgnoreCase("tal-aviv"));
+		boolean isSource = args.length > 0;	
 		if (isSource) {
 			source = args[1];
+			if(source.contains("-"))
+				source = source.replace("-", " ");
 		}
-		boolean isDestination = args.length > 0 && !(args[2].equalsIgnoreCase("Beer-sheva"));
+		boolean isDestination = args.length > 0;
 		if (isDestination) {
 			destination = args[2];
+			if(destination.contains("-"))
+				destination = destination.replace("-", " ");
 		}
 
 		boolean isHour = args.length > 0 && !(args[3].equalsIgnoreCase("12"));
