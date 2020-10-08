@@ -77,8 +77,8 @@ public class Main {
 					} while (bError);
 				} while (bAnotherStation);
 				allLines.add(new Line(allStops));
-				if (hourDelay != 0 || minutesDelay != 0) {			
-					allLines = Support.DuplicateLineByFrequency(allLines,hourDelay,minutesDelay);				
+				if (hourDelay != 0 || minutesDelay != 0) {
+					allLines = Support.DuplicateLineByFrequency(allLines, hourDelay, minutesDelay);
 				}
 				System.out.println();
 				System.out.println("added new lines to the system from " + allStops.get(0).getDeparturePlace() + " to "
@@ -89,7 +89,7 @@ public class Main {
 			}
 			case 2: {
 				allLines = Support.bubblesortByTime(allLines);
-				System.out.println(Support.getAllLinesDetails(allLines));			
+				System.out.println(Support.getAllLinesDetails(allLines));
 				break;
 			}
 			case 3: {
@@ -106,14 +106,14 @@ public class Main {
 					System.out.println("Enter a departure minuts");
 					minutes = s.nextInt();
 					s.nextLine();
-					LocalTime departureTime = LocalTime.of(hour, minutes);		
-					strWantedLines =  Support.routeSearch(allLines, departureTime, departureStation, arrivalPlace, false);
+					LocalTime departureTime = LocalTime.of(hour, minutes);
+					strWantedLines = Support.routeSearch(allLines, departureTime, departureStation, arrivalPlace,
+							false);
 				} else
 					System.out.println("No routes in the system");
-				if (strWantedLines != null){
+				if (strWantedLines != null) {
 					System.out.println(strWantedLines);
-				}
-				else
+				} else
 					System.out.println("couldn't find routs, try enter another parameters...");
 				break;
 			}
@@ -125,18 +125,18 @@ public class Main {
 				}
 				System.out.println("file saves succefully");
 			}
-		} 
-		}while (choice != 9);	
+			}
+		} while (choice != 9);
 		System.out.println("Good bye:)");
 		s.close();
 	}
 
-		public static String MenuHelper(int i) {
+	public static String MenuHelper(int i) {
 		final String str[] = new String[9];
 		str[0] = "add new line to the system";
 		str[1] = "Show details of all lines";
 		str[2] = "To search route ";
 		str[3] = "save to file";
 		return str[i];
-	}	
+	}
 }
