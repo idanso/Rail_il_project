@@ -37,7 +37,10 @@ public class MainUI {
 		boolean isMinuts = args.length > 0 && !(args[4].equalsIgnoreCase("00"));
 		if (isMinuts) {
 			minuts = Integer.parseInt(args[4]);
+<<<<<<< HEAD
 
+=======
+>>>>>>> a44283067d97893fbb84f229c095b2c670192d83
 		}
 		if (isHtml) {
 			System.out.println("<h2>\n<span style=\"text-decoration: underline;\">search resoult for : " + source
@@ -46,6 +49,10 @@ public class MainUI {
 		} else
 			System.out.println("search resoult for : " + source + " ---> " + destination + " " + hour + ":" + minuts
 					+ " | html format: " + isHtml);
+<<<<<<< HEAD
+=======
+
+>>>>>>> a44283067d97893fbb84f229c095b2c670192d83
 		LocalTime departureTime = LocalTime.of(hour, minuts);
 		strWantedLines = Support.routeSearch(allLines, departureTime, source, destination, isHtml);
 		if (strWantedLines != null) {

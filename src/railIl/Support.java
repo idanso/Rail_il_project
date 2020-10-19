@@ -16,7 +16,12 @@ public abstract class Support {
 		ArrayList<Route> routs = new ArrayList<Route>();
 		String departurePlace = null, arrivalPlace = null;
 		int departureHour = 0, departureMinutes = 0, arrivalHour = 0, arrivalMinutes;
+<<<<<<< HEAD
 		File myObj = new File("/home/moshe/newRail/Rail_il_project/AllLines.txt");
+=======
+		File myObj = new File(
+				"C:/programs for java studies/development_tools-project/new_Rail_il/Rail_il_project/AllLines.txt");
+>>>>>>> a44283067d97893fbb84f229c095b2c670192d83
 		Scanner myReader = new Scanner(myObj);
 		String line;
 		while (myReader.hasNextLine()) {

@@ -138,6 +138,9 @@ public class Main {
 		str[2] = "To search route ";
 		str[3] = "save to file";
 		return str[i];
+<<<<<<< HEAD
 
+=======
+>>>>>>> a44283067d97893fbb84f229c095b2c670192d83
 	}
 }

@@ -48,15 +48,15 @@ public class Route {
 				setArrivalTime(LocalTime.of(hour, minutes));
 				fcontinue = false;
 			} catch (InputMismatchException e) {
-				System.out.println("try again "+e.getMessage());
+				System.out.println("try again " + e.getMessage());
 
-			}
-			catch(IllegalArgumentException e) {
-				System.out.println("try again "+e.getMessage());
+			} catch (IllegalArgumentException e) {
+				System.out.println("try again " + e.getMessage());
 			}
 		} while (fcontinue);
 
 	}
+
 	public Route(String departurePlace, LocalTime departurelTime) {
 		Scanner s = new Scanner(System.in);
 		this.departurePlace = departurePlace;
@@ -84,9 +84,9 @@ public class Route {
 	}
 
 	public void setArrivalTime(LocalTime arrivalTime) {
-		if(departureTime != null) {
+		if (departureTime != null) {
 			do {
-				if(departureTime.isBefore(arrivalTime)) 
+				if (departureTime.isBefore(arrivalTime))
 					break;
 				System.out.println("departure time cannot be after arrival time... try again");
 				Scanner s = new Scanner(System.in);
@@ -96,8 +96,7 @@ public class Route {
 				int minutes = s.nextInt();
 				s.nextLine();
 				arrivalTime = LocalTime.of(hour, minutes);
-			}
-				while(true);
+			} while (true);
 		}
 		this.arrivalTime = arrivalTime;
 		return;

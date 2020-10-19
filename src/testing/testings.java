@@ -89,9 +89,17 @@ class testings {
 		tAllLines.add(createLineTveriaToAshkelon());
 		tAllLines = Support.DuplicateLineByFrequency((ArrayList<Line>) tAllLines, 2, 0);
 		Support.bubblesortByTime(tAllLines);
+<<<<<<< HEAD
 		assertEquals("1) 14:30 : hadera --> 15:20 : natanya --> 16:00 : herzelia --> 16:15 : tel aviv\n" + 
 				"2) 15:30 : hadera --> 16:20 : natanya --> 17:00 : tel aviv\n" + 
 				"3) 17:00 : hadera --> 17:50 : natanya --> 18:30 : herzelia --> 18:45 : tel aviv\n", Support.routeSearch(tAllLines, LocalTime.of(14, 20), "hadera", "tel aviv",false));
+=======
+		assertEquals(
+				"1) 14:30 : hadera --> 15:20 : natanya --> 16:00 : herzelia --> 16:15 : tel aviv\n"
+						+ "2) 15:30 : hadera --> 16:20 : natanya --> 17:00 : tel aviv\n"
+						+ "3) 17:00 : hadera --> 17:50 : natanya --> 18:30 : herzelia --> 18:45 : tel aviv\n",
+				Support.routeSearch(tAllLines, LocalTime.of(14, 20), "hadera", "tel aviv", false));
+>>>>>>> a44283067d97893fbb84f229c095b2c670192d83
 	}
 
 	Line createLineHaifaToAshdod() {
