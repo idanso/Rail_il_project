@@ -17,16 +17,16 @@ public class MainUI {
 		int hour = 12;
 		int minuts = 00;
 		boolean isHtml = args.length > 0 && args[0].equalsIgnoreCase("html");
-		boolean isSource = args.length > 0;	
+		boolean isSource = args.length > 0;
 		if (isSource) {
 			source = args[1];
-			if(source.contains("-"))
+			if (source.contains("-"))
 				source = source.replace("-", " ");
 		}
 		boolean isDestination = args.length > 0;
 		if (isDestination) {
 			destination = args[2];
-			if(destination.contains("-"))
+			if (destination.contains("-"))
 				destination = destination.replace("-", " ");
 		}
 
@@ -37,15 +37,20 @@ public class MainUI {
 		boolean isMinuts = args.length > 0 && !(args[4].equalsIgnoreCase("00"));
 		if (isMinuts) {
 			minuts = Integer.parseInt(args[4]);
-			System.out.println("<br>");
+
 		}
-		System.out.println("<h2>\n<span style=\"text-decoration: underline;\">search resoult for : " + source + " ---> " + destination + " " + hour + ":" + minuts + " | html format: " + isHtml + "</span>\n</h2>\n<br>\n<br>");
+		if (isHtml) {
+			System.out.println("<h2>\n<span style=\"text-decoration: underline;\">search resoult for : " + source
+					+ " ---> " + destination + " " + hour + ":" + minuts + " | html format: " + isHtml
+					+ "</span>\n</h2>\n<br>\n<br>");
+		} else
+			System.out.println("search resoult for : " + source + " ---> " + destination + " " + hour + ":" + minuts
+					+ " | html format: " + isHtml);
 		LocalTime departureTime = LocalTime.of(hour, minuts);
-		strWantedLines =  Support.routeSearch(allLines,departureTime ,source ,destination,isHtml);
-		if (strWantedLines != null){
+		strWantedLines = Support.routeSearch(allLines, departureTime, source, destination, isHtml);
+		if (strWantedLines != null) {
 			System.out.println(strWantedLines);
-		}
-		else
+		} else
 			System.out.println("couldn't find routs, try enter another parameters...");
 	}
 

@@ -1,0 +1,16 @@
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+    <form action="login" method="post">
+        <h1>תכנון מסלול נסיעה</h1>
+        <label>מקור</label>
+        <p><input type="text" name="source"/></p>
+        <label>יעד </label>
+        <p><input type="text" name="destination"/></p>
+        <label>שעת יציאה</label>
+        <p><input type="text" name="hour" required></p>
+        <label>דקות</label>
+        <p><input type="text" name="minuts" required></p>
+        <p><input type="submit" value="submit"/></p>
+    </form>
+{% endblock %}
