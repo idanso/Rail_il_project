@@ -6,12 +6,6 @@ import java.util.Scanner;
 
 public class Line {
 
-	public static void main(String[] args) {
-		String neme = "12:22";
-		System.out.println(neme.substring(0, 2));
-		System.out.println(neme.subSequence(3, neme.length() - 1));
-	}
-
 	private ArrayList<Route> allStops;
 
 	public Line(ArrayList<Route> allStops) {
